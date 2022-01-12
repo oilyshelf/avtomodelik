@@ -4,3 +4,5 @@ export const removeElement = (par) => {
 export const onConnect = (par) => {
 	return { type: "onConnect", param: par };
 };
+
+export const addNode = (par) => ({ type: "addNode", param: par });

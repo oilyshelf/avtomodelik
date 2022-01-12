@@ -127,6 +127,9 @@ export default (
 		case "onConnect":
 			state = addEdge(action.param, state);
 			return state;
+		case "addNode":
+			state = state.concat(action.param);
+			return state;
 		default:
 			return state;
 	}

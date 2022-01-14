@@ -6,3 +6,4 @@ export const onConnect = (par) => {
 };
 
 export const addNode = (par) => ({ type: "addNode", param: par });
+export const updateNode = (par) => ({ type: "updateNodePos", param: par });

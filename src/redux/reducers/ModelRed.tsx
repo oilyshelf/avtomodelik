@@ -125,10 +125,30 @@ export default (
 			state = removeElements(action.param, state);
 			return state;
 		case "onConnect":
-			state = addEdge(action.param, state);
+			console.log(action.param);
+			try {
+				state = addEdge(
+					{ arrowHeadType: "arrowclosed", ...action.param },
+					state
+				);
+			} catch {
+				console.log("error");
+			}
+
 			return state;
 		case "addNode":
-			state = state.concat(action.param);
+			try {
+				state = state.concat(action.param);
+			} catch {
+				console.log("error at adding node");
+			}
+
+			return state;
+		case "updateNodePos":
+			state[
+				state.findIndex((nodes) => nodes.id === action.param.id)
+			].position = action.position;
+
 			return state;
 		default:
 			return state;

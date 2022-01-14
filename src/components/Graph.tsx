@@ -1,15 +1,14 @@
 import React, { useState, useRef } from "react";
-
-import ReactFlow, {
-	removeElements,
-	addEdge,
-	MiniMap,
-	Controls,
-	Background,
-} from "react-flow-renderer";
+import ConnectionLine from "./ConnectionLine";
+import ReactFlow, { MiniMap, Controls, Background } from "react-flow-renderer";
 
 import { useAppSelector, useAppDispatch } from "../redux/utils/hooks";
-import { addNode, onConnect, removeElement } from "../redux/actions";
+import {
+	addNode,
+	onConnect,
+	removeElement,
+	updateNode,
+} from "../redux/actions";
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
@@ -58,15 +57,21 @@ const OverviewFlow = () => {
 		// setElements((es) => es.concat(newNode));
 	};
 
+	const updateNodePosition = (e, node) => {
+		dispatch(updateNode(node));
+	};
+
 	return (
 		<div className="reactflow-wrapper w-full h-full" ref={reactFlowWrapper}>
 			<ReactFlow
 				elements={els}
 				onElementsRemove={onElementsRemove}
 				onConnect={onConnectE}
+				connectionLineComponent={ConnectionLine}
 				onLoad={onLoad}
 				onDrop={onDrop}
 				onDragOver={onDragOver}
+				onNodeDragStop={updateNodePosition}
 				snapToGrid={true}
 				snapGrid={[15, 15]}
 			>
